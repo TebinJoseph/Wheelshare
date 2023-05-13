@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "942036354484",
+    "project_id": "wheelshare-a9562",
+    "storage_bucket": "wheelshare-a9562.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942036354484:android:54b1ea128dd193f5965ee1",
+        "android_client_info": {
+          "package_name": "com.example.wheel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942036354484-lfe4lc8tciuh9su15i0ud4m10g771vll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wheel",
+            "certificate_hash": "45a76442e199acaf603e6550999cc30c4ee2fc1c"
+          }
+        },
+        {
+          "client_id": "942036354484-tmrvtkjma8re7nijmpn2r04a9mr7snda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ-3DatBAiEK_2IePt1bBUAdgTxBTpbYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942036354484-tmrvtkjma8re7nijmpn2r04a9mr7snda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

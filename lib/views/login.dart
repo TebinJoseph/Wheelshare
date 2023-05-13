@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (ctx2){
-                        return RegisterScreen();
+                        return SignUpScreen();
                         },
                         ),
                         );
