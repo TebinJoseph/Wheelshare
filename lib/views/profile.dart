@@ -18,78 +18,84 @@ class Profile1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-             const SizedBox(
-                width: 120,
-                height: 30,
-                
-              ),
-              const SizedBox(height: 30),
-              Text('Profile', style: TextStyle(color: Colors.black,fontSize: 40,)),
-              Text('Profile@gmail.com',
-                  style: TextStyle(color: Colors.black,fontSize: 15),),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>   EditProfilePage())
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: tdBlue,
-                      side: BorderSide.none,
-                      elevation: 0,
-                      shape: const StadiumBorder()),
-                  child: const Text('Edit Profile',
-                      style: TextStyle(color: tdWhite)),
+      body: Container(
+         height: MediaQuery.of(context).size.height,
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 24, 23, 23),),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+               const SizedBox(
+                  width: 120,
+                  height: 30,
+                  
                 ),
-              ),
-              const SizedBox(height: 30),
-              const SizedBox(height: 20),
-              ProfileMenuWidget(
-                title: 'Settings',
-                icon: Icons.settings,
-                onPress: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SettingsScreen()));
-                },
-              ),
-              ProfileMenuWidget(
-                title: 'History',
-                icon: Icons.history,
-                onPress: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HistoryScreen()));
-                },
-              ),
-              
-              ProfileMenuWidget(
-                title: 'Help',
-                icon: Icons.question_mark,
-                onPress: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HelpScreen()));
-                },
-              ),
-              const SizedBox(height: 20),
-              ProfileMenuWidget(
-                title: 'Logout',
-                icon: Icons.logout,
-                textColor: tdRed,
-                onPress: () {
-                  FireAuth.logout();
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
-                      (Route<dynamic> route) => false);
-                },
-              ),
-            ],
+                const SizedBox(height: 30),
+               const Text('Profile', style: TextStyle(color: Colors.white,fontSize: 40,)),
+                const Text('Profile@gmail.com',
+                    style: TextStyle(color: Colors.white,fontSize: 15),),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>   EditProfilePage())
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: tdBlue,
+                        side: BorderSide.none,
+                        elevation: 0,
+                        shape: const StadiumBorder()),
+                    child: const Text('Edit Profile',
+                        style: TextStyle(color: tdWhite)),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                const SizedBox(height: 20),
+                ProfileMenuWidget(
+                  title: 'Settings',
+                  icon: Icons.settings,
+                  onPress: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SettingsScreen()));
+                  },
+                ),
+                ProfileMenuWidget(
+                  title: 'History',
+                  icon: Icons.history,
+                  onPress: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HistoryScreen()));
+                  },
+                ),
+                
+                ProfileMenuWidget(
+                  title: 'Help',
+                  icon: Icons.question_mark,
+                  onPress: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HelpScreen()));
+                  },
+                ),
+                const SizedBox(height: 20),
+                ProfileMenuWidget(
+                  title: 'Logout',
+                  icon: Icons.logout,
+                  textColor: tdRed,
+                  onPress: () {
+                    FireAuth.logout();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                        (Route<dynamic> route) => false);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -121,7 +127,7 @@ class ProfileMenuWidget extends StatelessWidget {
        
         child: Icon(
           icon,
-          color: const Color.fromARGB(255, 0, 4, 3),
+          color:  Colors.white,
         ),
       ),
       title: Text(title, style: TextStyle(color: textColor)),
@@ -132,7 +138,7 @@ class ProfileMenuWidget extends StatelessWidget {
         child: const Icon(
           LineAwesomeIcons.angle_right,
           size: 18.0,
-          color: Color.fromARGB(255, 4, 0, 0),
+          color: Colors.white,
         ),
       ),
     );
