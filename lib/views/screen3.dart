@@ -30,7 +30,7 @@ class _ProfileState extends State<Profile> {
           mainAxisAlignment: MainAxisAlignment.center ,
           children: [
             ElevatedButton(onPressed: () {
-                Navigator.of(context).pop();
+              
                 }, child: Text('Logout')),
           ],
         ),

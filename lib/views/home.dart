@@ -6,6 +6,7 @@ import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:wheel/views/screen1.dart';
 import 'package:wheel/views/screen2.dart';
 import 'package:wheel/views/screen3.dart';
+import 'package:wheel/views/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
    List<Widget> widgetList =[
    Log(),
    Home(),
-   Profile(),
+   Profile1(),
 ];
 
   @override
@@ -39,18 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
           });
          },
          currentIndex: myindex,
-        items: [
-          const BottomNavigationBarItem(
+        items:const [
+           BottomNavigationBarItem(
             label: 'Log',
             icon: Icon(Icons.receipt_long),
             backgroundColor: Colors.white,
           ),
-          const BottomNavigationBarItem(
+           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(Icons.home),
             backgroundColor: Colors.white,
           ),
-          const BottomNavigationBarItem(
+           BottomNavigationBarItem(
             label: 'Profile',
             icon: Icon(Icons.person_2_rounded),
             backgroundColor: Colors.white,
