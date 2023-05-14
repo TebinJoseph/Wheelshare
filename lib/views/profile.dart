@@ -53,8 +53,7 @@ class Profile1 extends StatelessWidget {
                         style: TextStyle(color: tdWhite)),
                   ),
                 ),
-                const SizedBox(height: 30),
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
                 ProfileMenuWidget(
                   title: 'Settings',
                   icon: Icons.settings,
@@ -80,7 +79,7 @@ class Profile1 extends StatelessWidget {
                         builder: (context) => const HelpScreen()));
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 20,),
                 ProfileMenuWidget(
                   title: 'Logout',
                   icon: Icons.logout,
