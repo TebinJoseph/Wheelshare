@@ -28,9 +28,9 @@ class Profile1 extends StatelessWidget {
                 
               ),
               const SizedBox(height: 30),
-              Text('Profile', style: TextStyle(color: Colors.black,fontSize: 50,)),
+              Text('Profile', style: TextStyle(color: Colors.black,fontSize: 40,)),
               Text('Profile@gmail.com',
-                  style: TextStyle(color: Colors.black,fontSize: 20),),
+                  style: TextStyle(color: Colors.black,fontSize: 15),),
               const SizedBox(height: 20),
               SizedBox(
                 width: 200,
