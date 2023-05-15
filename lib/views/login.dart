@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/views/home.dart';
+import 'package:wheel/views/profile_pages/editprofile.dart';
 import 'package:wheel/views/register.dart';
 import 'package:wheel/views/trip.dart';
 import 'package:wheel/services/firebase_auth.dart';
@@ -10,7 +11,7 @@ import 'package:wheel/services/firebase_auth.dart';
 // import 'package:mini/models/login_tiles.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+  LoginScreen({super.key});
   FireAuth authController = Get.find<FireAuth>();
 
   @override
@@ -30,8 +31,14 @@ class _LoginScreenState extends State<LoginScreen> {
     if (s == "success") {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) =>  HomeScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),
           (route) => false);
+    } else if (s == 'user-not-found') {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(s)));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SignUpScreen()),
+      );
     } else {
       setState(() {
         _isloading = false;
@@ -108,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                 onPressed: () async {
-               signinhere();
+                  signinhere();
                 },
                 style: ButtonStyle(
                     minimumSize: MaterialStateProperty.all(const Size(300, 50)),

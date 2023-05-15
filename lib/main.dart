@@ -7,22 +7,22 @@ import 'package:wheel/views/login.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-     FireAuth authController = Get.put(FireAuth() );
-    authController.decideRoute();
-   
-      return MaterialApp(
+    FireAuth authController = Get.put(FireAuth());
+    // authController.decideRoute();
+
+    return MaterialApp(
         home: StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
