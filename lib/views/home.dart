@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:wheel/services/firebase_auth.dart';
+import 'package:wheel/views/profile_pages/add_ride.dart';
 import 'package:wheel/views/trip.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:wheel/views/screen1.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int myindex=0;
    List<Widget> widgetList =[
    Log(),
-   Home(),
+   AddRidePage(),
    Profile1(),
 ];
 

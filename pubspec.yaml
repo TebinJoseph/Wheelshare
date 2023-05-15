@@ -43,6 +43,9 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   image_picker: ^0.8.7+5
   cloud_firestore: ^4.7.0
+  google_maps_flutter: ^2.2.6
+  shared_preferences_android: ^2.1.4
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_test:
