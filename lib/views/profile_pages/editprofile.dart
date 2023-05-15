@@ -120,7 +120,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                      style: OutlinedButton.styleFrom(
                       padding:const EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
@@ -134,7 +136,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             color: Colors.black)),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       padding: const EdgeInsets.symmetric(horizontal: 50),

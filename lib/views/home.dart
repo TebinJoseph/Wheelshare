@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:wheel/services/firebase_auth.dart';
 import 'package:wheel/views/trip.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:wheel/views/screen1.dart';
@@ -9,7 +11,7 @@ import 'package:wheel/views/screen3.dart';
 import 'package:wheel/views/profile.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+   HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

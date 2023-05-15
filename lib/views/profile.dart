@@ -89,7 +89,7 @@ class Profile1 extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
+                            builder: (context) =>  LoginScreen()),
                         (Route<dynamic> route) => false);
                   },
                 ),

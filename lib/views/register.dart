@@ -21,7 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (s == "success") {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) =>  HomeScreen()),
           (route) => false);
     } else {
       setState(() {
@@ -34,6 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
