@@ -51,7 +51,7 @@ class _State extends State<AddRidePage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Trip Register'),
+          title: Center(child: const Text('Trip Register')),
         ),
         body: Container(
           color:  Color.fromARGB(255, 24, 23, 23),
@@ -80,7 +80,7 @@ class _State extends State<AddRidePage> {
                     child: const Text('Select time'),
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16.0),
-                      primary: Colors.pink,
+                      primary: Colors.red,
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: () => (() async {
@@ -88,12 +88,12 @@ class _State extends State<AddRidePage> {
                       print(time);
                     }()),
                   ),
-                  Text('${time}'),
+                  Text('${time}',style: TextStyle(color: Colors.white),),
                   TextButton(
-                      child: const Text('Continue'),
+                      child: const Text('Create Trip'),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.all(16.0),
-                        primary: Colors.pink,
+                        primary: Colors.red,
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () => (() async {
