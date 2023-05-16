@@ -7,7 +7,6 @@ import 'package:wheel/views/theme/rounded_input_field.dart';
 //import 'package:groupool/theme/login_background.dart';
 import 'package:wheel/views/theme/rounded_button.dart';
 
-
 class RideListPage extends StatefulWidget {
   const RideListPage({Key? key}) : super(key: key);
   @override
@@ -15,7 +14,7 @@ class RideListPage extends StatefulWidget {
 }
 
 class _RideListPageState extends State<RideListPage> {
-  final TextEditingController _filter =  TextEditingController();
+  final TextEditingController _filter = TextEditingController();
   var rideList = [];
   Widget _appBarTitle = const Text('Ride list');
   Icon _searchIcon = new Icon(Icons.search, color: Colors.white);
@@ -108,7 +107,7 @@ class _RideListPageState extends State<RideListPage> {
                   } else {
                     this._searchIcon =
                         new Icon(Icons.search, color: Colors.white);
-                    this._appBarTitle =  Text('Groupool');
+                    this._appBarTitle = Text('Ride List');
                     _searchText = "";
                     _filter.clear();
                   }

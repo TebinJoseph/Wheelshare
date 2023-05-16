@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wheel/services/firebase_auth.dart';
+import 'package:wheel/views/emailverfication.dart';
 import 'package:wheel/views/home.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -18,11 +21,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String s = await FireAuth.signUp(
         emailController: _emailController.text.trim(),
         passwordController: _passwordController.text.trim());
+    final user = FirebaseAuth.instance.currentUser;
+    await user!.sendEmailVerification();
     if (s == "success") {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) =>  HomeScreen()),
-          (route) => false);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => VerificationScreen()),
+      );
     } else {
       setState(() {
         _isloading = false;
@@ -34,18 +39,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-       
-      ),
+      appBar: AppBar(),
       body: Container(
-         height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(16),
-        color:  Color.fromARGB(255, 24, 23, 23),
+        color: Color.fromARGB(255, 24, 23, 23),
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(16),
-            
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const Text(
                   "Register",
-                  style: TextStyle(fontSize: 25,color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.white),
                 ),
                 const SizedBox(
                   height: 40,
@@ -65,7 +67,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   decoration: const InputDecoration(
                       filled: true,
                       hintText: "Name",
-                      hintStyle: TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderSide: BorderSide.none,
@@ -79,7 +82,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   decoration: const InputDecoration(
                       filled: true,
                       hintText: "Enter email ",
-                      hintStyle: TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderSide: BorderSide.none,
@@ -94,7 +98,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   decoration: const InputDecoration(
                       filled: true,
                       hintText: "Enter password",
-                      hintStyle: TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderSide: BorderSide.none,
@@ -108,7 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     signuphere();
                   },
                   style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(const Size(300, 50)),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 50)),
                       backgroundColor: MaterialStateColor.resolveWith(
                           (states) => Colors.blue),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
