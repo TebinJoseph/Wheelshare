@@ -37,6 +37,24 @@ Future<List?> getRideData() async {
     return rideList;
   } catch (e) {}
 }
+Future<dynamic> addRider(String riderEmail, String docID) async {
+  try {
+    var document =
+        FirebaseFirestore.instance.collection('ride-table').doc(docID);
+
+    var snapshot = await document.get();
+    if (snapshot.exists) {
+      Map<String, dynamic>? data = snapshot.data();
+      var value = data?['riderList'];
+
+      if (!value.contains(riderEmail) && value.length <= 5) {
+        value.add(riderEmail);
+        document.update({'riderList': value});
+      }
+    }
+  } catch (e) {}
+}
+
 
 
 

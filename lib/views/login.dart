@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wheel/views/home.dart';
+import 'package:wheel/views/password.dart';
 import 'package:wheel/views/profile_pages/editprofile.dart';
 import 'package:wheel/views/register.dart';
 import 'package:wheel/views/trip.dart';
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _emailController,
                 decoration: const InputDecoration(
                     filled: true,
-                    hintText: "Enter email or phone",
+                    hintText: "Enter email ",
                     hintStyle:
                         TextStyle(color: Color.fromARGB(255, 179, 176, 186)),
                     fillColor: Colors.white,
@@ -103,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                       
+                      },
                       child: const Text(
                         "Forgot Password?",
                         style: TextStyle(color: Colors.grey),
@@ -159,50 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.white,
-                            style: BorderStyle.solid,
-                            width: 3,
-                          )),
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        "assets/images/google.png",
-                        height: 40,
-                      ),
-                    ),
-                    iconSize: 65,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.white,
-                            style: BorderStyle.solid,
-                            width: 3,
-                          )),
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        "assets/images/facebook.png",
-                        height: 40,
-                      ),
-                    ),
-                    iconSize: 65,
-                  )
-                ],
-              ),
+             
               const SizedBox(
                 height: 20,
               ),
