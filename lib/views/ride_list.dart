@@ -116,37 +116,45 @@ class _RideListPageState extends State<RideListPage> {
               }),
         ],
       ),
-      body: Center(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: filteredRides.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text('${filteredRides[index]['start']} ' +
-                        'To' +
-                        ' ${filteredRides[index]['end']}'),
-                    subtitle: Text('${filteredRides[index]['time']}' +
-                        '\n' +
-                        '${filteredRides[index]['email']}'),
-                    trailing: TextButton(
-                      child: Text('Request'),
-                      onPressed: () {
-                        addRider(email, '${rideList[index]['id']}').then(
-                          (data) {
-                            setState(() {
-                              if (data != null) {
-                                rideList = data;
-                              }
-                            });
-                          },
-                        );
-                      },
-                    ),
-                    tileColor: Colors.pink.shade50,
-                  ));
-            }),
+      body: Container(
+         height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 24, 23, 23)),
+
+        child: Center(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: filteredRides.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ListTile(
+                      title: Text('${filteredRides[index]['start']} ' +
+                          'To' +
+                          ' ${filteredRides[index]['end']}',style: TextStyle(color: Colors.white),),
+                      subtitle: Text('${filteredRides[index]['time']}' +
+                          '\n' +
+                          '${filteredRides[index]['email']}',style: TextStyle(color: Colors.white),),
+                      trailing: TextButton(
+                        child: Text('Request'),
+                        onPressed: () {
+                          addRider(email, '${rideList[index]['id']}').then(
+                            (data) {
+                              setState(() {
+                                if (data != null) {
+                                  rideList = data;
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+                      tileColor: Colors.white,
+                    ));
+              }),
+        ),
       ),
     );
   }
