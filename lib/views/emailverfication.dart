@@ -16,7 +16,7 @@ class _MyWidgetState extends State<VerificationScreen> {
       ),
       body: Column(
         children: [
-          Text("Email send .Check your email for logging in "),
+          Center(child: Text("Email send .Check your email for logging in ")),
         ],
       ),
     );
