@@ -8,9 +8,8 @@ import 'package:wheel/views/theme/rounded_input_field.dart';
 //import 'package:groupool/theme/login_background.dart';
 import 'package:wheel/views/theme/rounded_button.dart';
 
-
-
 class AddRidePage extends StatefulWidget {
+  static String email = '';
   const AddRidePage({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class _State extends State<AddRidePage> {
   String time = "10:00 AM";
   var rideList = [];
   var prefs, row;
-  String email = '';
+
   void initState() {
     getRideData().then(
       (data) {
@@ -42,7 +41,7 @@ class _State extends State<AddRidePage> {
     prefs = await SharedPreferences.getInstance().then((value) => {
           setState(() {
             prefs = value;
-            email = '${value.getString('useremail')}';
+            AddRidePage.email = '${value.getString('useremail')}';
           })
         });
   }
@@ -54,18 +53,18 @@ class _State extends State<AddRidePage> {
         appBar: AppBar(
           title: Center(child: const Text('Trip Register')),
         ),
-        body: Container(height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(16),
-
-          color:  Color.fromARGB(255, 24, 23, 23),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(16),
+          color: Color.fromARGB(255, 24, 23, 23),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                 const SizedBox(
-              height: 80,
-            ),
+                const SizedBox(
+                  height: 80,
+                ),
                 RoundedInputField(
                   key: ValueKey('start'),
                   hintText: "Enter Start Location",
@@ -73,7 +72,6 @@ class _State extends State<AddRidePage> {
                     start_location = value;
                   },
                 ),
-                
                 RoundedInputField(
                   key: ValueKey('end'),
                   hintText: "Enter End Location",
@@ -81,9 +79,9 @@ class _State extends State<AddRidePage> {
                     end_location = value;
                   },
                 ),
-                 const SizedBox(
-              height: 40,
-            ),
+                const SizedBox(
+                  height: 40,
+                ),
                 TextButton(
                   child: const Text('Select time'),
                   style: TextButton.styleFrom(
@@ -96,7 +94,10 @@ class _State extends State<AddRidePage> {
                     print(time);
                   }()),
                 ),
-                Text('${time}',style: TextStyle(color: Colors.white),),
+                Text(
+                  '${time}',
+                  style: TextStyle(color: Colors.white),
+                ),
                 TextButton(
                     child: const Text('Create Trip'),
                     style: TextButton.styleFrom(
@@ -107,42 +108,42 @@ class _State extends State<AddRidePage> {
                     onPressed: () => (() async {
                           if (start_location.isNotEmpty &&
                               end_location.isNotEmpty) {
-                            var success_factor = addRide(
-                                start_location, end_location, time, email);
+                            var success_factor = addRide(start_location,
+                                end_location, time, AddRidePage.email);
                           } else {}
                         }())),
-                         const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'OR',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 20,
-                  wordSpacing: 1,
-                  fontWeight: FontWeight.bold),
-            ),
-                 const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: 150,
-              child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx3) {
-                          return RideListPage();
-                        },
-                      ),
-                    ); //await loginhere();
-                  },
-                  child: const Text(
-                    'Search a Trip',
-                    style: TextStyle(fontSize: 15),
-                  )),
-            ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  'OR',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20,
+                      wordSpacing: 1,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx3) {
+                              return RideListPage();
+                            },
+                          ),
+                        ); //await loginhere();
+                      },
+                      child: const Text(
+                        'Search a Trip',
+                        style: TextStyle(fontSize: 15),
+                      )),
+                ),
               ],
             ),
           ),
@@ -156,5 +157,4 @@ Future<String> _selectTime(BuildContext context) async {
     initialTime: TimeOfDay.now(),
   );
   return picked!.format(context);
-  
 }

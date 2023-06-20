@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wheel/views/home.dart';
 import 'package:wheel/services/firebase_auth.dart';
 import 'package:wheel/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wheel/views/profile_pages/add_ride.dart';
 import 'package:wheel/views/theme/rounded_input_field.dart';
 //import 'package:groupool/theme/login_background.dart';
 import 'package:wheel/views/theme/rounded_button.dart';
@@ -61,7 +64,7 @@ class _RideListPageState extends State<RideListPage> {
     prefs = await SharedPreferences.getInstance().then((value) => {
           setState(() {
             prefs = value;
-            email = '${value.getString('useremail')}';
+            email = '${value.getString('email')}';
           })
         });
   }
@@ -116,12 +119,10 @@ class _RideListPageState extends State<RideListPage> {
         ],
       ),
       body: Container(
-         height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 24, 23, 23)),
-
+        decoration: const BoxDecoration(color: Color.fromARGB(255, 24, 23, 23)),
         child: Center(
           child: ListView.builder(
               padding: const EdgeInsets.all(8),
@@ -130,15 +131,26 @@ class _RideListPageState extends State<RideListPage> {
                 return Padding(
                     padding: const EdgeInsets.all(10),
                     child: ListTile(
-                      title: Text('${filteredRides[index]['start']} ' +
-                          'To' +
-                          ' ${filteredRides[index]['end']}',style: TextStyle(color: Colors.white),),
-                      subtitle: Text('${filteredRides[index]['time']}' +
-                          '\n' +
-                          '${filteredRides[index]['email']}',style: TextStyle(color: Colors.white),),
+                      title: Text(
+                        '${filteredRides[index]['start']} ' +
+                            'To' +
+                            ' ${filteredRides[index]['end']}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      subtitle: Text(
+                        '${filteredRides[index]['time']}' +
+                            '\n' +
+                            '${filteredRides[index]['email']}',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       trailing: TextButton(
                         child: Text('Request'),
                         onPressed: () {
+                          print(email);
+                          FirebaseFirestore.instance
+                              .collection('ride-table')
+                              .doc(docid)
+                              .update({'riderList': AddRidePage.email});
                           addRider(email, '${rideList[index]['id']}').then(
                             (data) {
                               setState(() {

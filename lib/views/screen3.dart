@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:wheel/views/profile.dart';
 import 'package:wheel/views/trip.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
+
+import '../services/firebase_auth.dart';
+import 'color.dart';
+import 'login.dart';
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -26,17 +32,23 @@ class _ProfileState extends State<Profile> {
           //   colors: [Color(0x0fe6e5ed), Color(0xfff4f0f4)],
           // )
         ),
-        child:  Column( 
-          mainAxisAlignment: MainAxisAlignment.center ,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: () {
-              
-                }, child: Text('Logout')),
+            ProfileMenuWidget(
+                title: 'Logout',
+                icon: Icons.logout,
+                textColor: tdRed,
+                onPress: () {
+                  FireAuth.logout();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      (Route<dynamic> route) => false);
+                })
           ],
         ),
-
       ),
-      
     );
   }
 }

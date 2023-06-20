@@ -26,14 +26,14 @@ class FireAuth extends GetxController {
 
   static Future<String> signUp(
       {required String emailController,
-      required String passwordController}) async {
+      required String passwordController,required name}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: emailController, password: passwordController);
       await FirebaseAuth.instance.currentUser!.updateEmail(emailController);
       await FirestoreServices.saveUser(
-          emailController, userCredential.user!.uid);
+          emailController,name, userCredential.user!.uid);
       s = "success";
     } on FirebaseAuthException catch (e) {
       s = e.toString();

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wheel/views/home.dart';
 import 'package:wheel/views/password.dart';
 import 'package:wheel/views/profile_pages/editprofile.dart';
 import 'package:wheel/views/register.dart';
 import 'package:wheel/views/trip.dart';
 import 'package:wheel/services/firebase_auth.dart';
+import 'package:wheel/services/firebasefunctions.dart';
+
+import '../services/database.dart';
 
 // import 'package:flutter/src/widgets/framework.dart';
 // import 'package:flutter/src/widgets/placeholder.dart';
@@ -30,6 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController: _emailController.text.trim(),
         passwordController: _passwordController.text.trim());
     if (s == "success") {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('auth', true);
+      await prefs.setString(
+          'useremail', _emailController.text.trim().toString());
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -112,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                         );
-
                       },
                       child: const Text(
                         "Forgot Password?",
@@ -125,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  storeValues();
                   signinhere();
                 },
                 style: ButtonStyle(
@@ -169,7 +177,6 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 20,
               ),
-             
               const SizedBox(
                 height: 20,
               ),

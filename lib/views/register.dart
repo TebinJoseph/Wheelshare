@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:wheel/services/firebase_auth.dart';
 import 'package:wheel/views/emailverfication.dart';
 import 'package:wheel/views/home.dart';
+import 'package:wheel/views/profile_pages/editprofile.dart';
+
+import '../services/database.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,21 +17,29 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _namecontroller=TextEditingController();
   // ignore: unused_field
   bool _isloading = false;
   signuphere() async {
     _isloading = true;
     String s = await FireAuth.signUp(
         emailController: _emailController.text.trim(),
+        name:_namecontroller.text.trim()
+        ,
         passwordController: _passwordController.text.trim());
-    final user = FirebaseAuth.instance.currentUser;
+   var user = await FirebaseAuth.instance.currentUser;
     await user!.sendEmailVerification();
     if (s == "success") {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => VerificationScreen()),
       );
-    } else {
+       Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => EditProfilePage()),
+          (route) => false);
+    }
+     else {
       setState(() {
         _isloading = false;
       });
@@ -63,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 40,
                 ),
                 TextFormField(
-                  //controller: _emailController,
+                  controller: _namecontroller,
                   decoration: const InputDecoration(
                       filled: true,
                       hintText: "Name",
@@ -110,6 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                     storeValues();
                     signuphere();
                   },
                   style: ButtonStyle(
