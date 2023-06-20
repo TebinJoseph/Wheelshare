@@ -146,7 +146,7 @@ class _RideListPageState extends State<RideListPage> {
                       trailing: TextButton(
                         child: Text('Request'),
                         onPressed: () {
-                          print(email);
+                          print(AddRidePage.email);
                           FirebaseFirestore.instance
                               .collection('ride-table')
                               .doc(docid)
