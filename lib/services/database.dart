@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wheel/views/profile_pages/add_ride.dart';
+
+import '../views/profile_pages/add_ride.dart';
 
 String? docid;
 
@@ -74,20 +77,24 @@ Future<Map?> getRideById(docID) async {
   } catch (e) {}
 }
 
-getCartData(email) async {
+getCartData(String email, start) async {
   print(email);
+  print(start);
   Future<Map> data;
   List rideList = [];
   Map rideList1 = {};
   List templist = [];
   try {
-    var snapshot =
-        await FirebaseFirestore.instance.collection('ride-table').get();
+    var snapshot = await FirebaseFirestore.instance
+        .collection('ride-table')
+        .where('riderList', isEqualTo: email)
+        .get();
     for (var doc in snapshot.docs) {
       rideList1 = doc.data();
       rideList1.putIfAbsent('id', () {
         doc.id;
         docid = doc.id;
+        print(docid);
       });
       //rideList1.putIfAbsent('id', () => doc.id);
       if (rideList1["riderList"] != null) {
@@ -96,9 +103,9 @@ getCartData(email) async {
         }
       }
     }
-    print(rideList);
-    print(rideList1);
-    return rideList1;
+    //print(rideList);
+    //print(rideList1);
+    //return docid1;
   } catch (e) {}
 }
 

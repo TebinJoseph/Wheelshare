@@ -17,29 +17,28 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _namecontroller=TextEditingController();
+  final _namecontroller = TextEditingController();
   // ignore: unused_field
   bool _isloading = false;
   signuphere() async {
     _isloading = true;
     String s = await FireAuth.signUp(
         emailController: _emailController.text.trim(),
-        name:_namecontroller.text.trim()
-        ,
+        name: _namecontroller.text.trim(),
         passwordController: _passwordController.text.trim());
-   var user = await FirebaseAuth.instance.currentUser;
+    var user = await FirebaseAuth.instance.currentUser;
     await user!.sendEmailVerification();
+
     if (s == "success") {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => VerificationScreen()),
       );
-       Navigator.pushAndRemoveUntil(
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => EditProfilePage()),
           (route) => false);
-    }
-     else {
+    } else {
       setState(() {
         _isloading = false;
       });
@@ -121,7 +120,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                     storeValues();
                     signuphere();
                   },
                   style: ButtonStyle(

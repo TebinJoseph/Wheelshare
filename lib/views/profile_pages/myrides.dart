@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,85 +9,87 @@ import '../../services/database.dart';
 import 'add_ride.dart';
 
 class RideCart extends StatefulWidget {
-  const RideCart({Key? key}) : super(key: key);
+  const RideCart({super.key});
 
   @override
-  _RideCartState createState() => _RideCartState();
+  State<RideCart> createState() => _RideCartState();
 }
 
 class _RideCartState extends State<RideCart> {
-  var rideList = [];
-  var prefs, row;
-  String email = '';
-  @override
-  void initState() {
-    initPrefs();
-    super.initState();
-  }
-
-  void initPrefs() async {
-    prefs = await SharedPreferences.getInstance().then((value) => {
-          setState(() {
-            prefs = value;
-            AddRidePage.email = '${value.getString('useremail')}';
-          })
-        });
-    getCartData(email).then(
-      (data) {
-        setState(() {
-          if (data != null) {
-            rideList = data;
-          }
-        });
-        print(rideList);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Ridecart"),
-        backgroundColor: Colors.pink,
-      ),
-      body: Center(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: rideList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text('${rideList[index]['start']} ' +
-                        'To' +
-                        ' ${rideList[index]['end']}'),
-                    subtitle: Text('${rideList[index]['time']}' +
-                        '\n' +
-                        '${rideList[index]['email']}'),
-                    trailing: TextButton(
-                        child: Text('Details'),
-                        key: ValueKey('detailButton'),
-                        onPressed: () {
-                          getRideById('${rideList[index]['id']}').then(
-                            ////////////////ERROR HERE
-
-                            (data) {
-                              if (data != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => rideDetail(
-                                              ride: data,
-                                            )));
-                              }
-                            },
-                          );
-                        }),
-                    tileColor: Colors.pink.shade50,
-                  ));
-            }),
-      ),
-    );
+        appBar: AppBar(
+          title: Text("My Rides"),
+        ),
+        body: Container(
+          color: Color.fromARGB(255, 24, 23, 23),
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('ride-table')
+                  .where('riderList',
+                      isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      final DocumentSnapshot rides = snapshot.data!.docs[index];
+                      String a = snapshot.data!.docs[index].id;
+                      return Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Container(
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                Text(
+                                  rides['start'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  "  to  ",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Text(
+                                  rides['end'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  rides['time'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  rides['email'],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('ride-table')
+                                      .doc(a)
+                                      .update({'riderList': ""});
+                                },
+                                child: Text("Delete ride request"))
+                          ]),
+                        ),
+                      );
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  );
+                } else {
+                  return const Center(child: Text("No data Available"));
+                }
+              }),
+        ));
   }
 }
